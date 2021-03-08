@@ -1,0 +1,26 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 200px;
+  background-color: #2bbcff;
+  margin: 0 20px;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 42px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.container a:hover {
+  background-color: #1998d3;
+}
