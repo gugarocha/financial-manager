@@ -1,0 +1,19 @@
+#extractTypeContainer {
+  width: 100%;
+  text-align: center;
+}
+
+#extractTypeContainer + #extractTypeContainer {
+  border-left: 1px solid #95a5a6;
+}
+
+#extractTypeContainer h5 {
+  color: #2bbcff;
+  font-weight: 600;
+}
+
+#extractTypeContainer span {
+  color: #6a7777;
+  font-size: 32px;
+  font-weight: bold;
+}

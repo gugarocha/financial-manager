@@ -1,0 +1,29 @@
+#entryContainer {
+  display: flex;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #bdc3c7;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+#entryContainer .entryDate {
+  width: 15%;
+}
+
+#entryContainer .entryName {
+  width: 65%;
+}
+
+
+#entryContainer .debitCategory {
+  display: flex;
+  align-items: center;
+  color: #e74c3c;
+}
+
+#entryContainer .creditCategory {
+  display: flex;
+  align-items: center;
+  color: #27ae60;
+}
