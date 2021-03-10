@@ -4,12 +4,12 @@ import './styles.css'
 
 function Home() {
   return (
-    <div className={'container'}>
-      <Link href="/newEntry">
+    <div id='home-container'>
+      <Link to="/newEntry">
           Novo <br/> Lançamento
       </Link>
       
-      <Link href="/report">
+      <Link to="/report">
           Relatório <br/> Mensal
       </Link>
     </div>

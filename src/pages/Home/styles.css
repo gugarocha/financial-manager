@@ -1,4 +1,4 @@
-.container {
+#home-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.container a {
+#home-container a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,6 @@
   transition: background-color 0.3s;
 }
 
-.container a:hover {
+#home-container a:hover {
   background-color: #1998d3;
 }
