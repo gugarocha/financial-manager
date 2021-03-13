@@ -4,7 +4,7 @@ import './styles.css';
 
 export default function Entry({ data }) {
   const { id, datetime, entryName, value, category } = data;
-  const date = new Date(datetime).toLocaleDateString('pt-br');
+  const date = new Date(datetime.seconds * 1000).toLocaleDateString('pt-br');
 
   return (
     <ul id='entryContainer' key={id}>

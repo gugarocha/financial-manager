@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 
+import useEntries from "../../hooks/useEntries";
+
 import Header from "../../components/Header";
 import ExtractType from '../../components/ExtractType';
 import Entry from '../../components/Entry';
@@ -12,13 +14,7 @@ import formatToMonthName from '../../utils/formatToMonthName';
 function Report() {
   const [calendarOpened, setCalendarOpened] = useState(false);
   const [date, setDate] = useState(new Date());
-
-  const entries = [
-    {id: 1, datetime: new Date(), entryName: 'Boleto BRF', value: 3000, category: 'debit'},
-    {id: 2, datetime: new Date(), entryName: 'Boleto DFA', value: 350.32, category: 'debit'},
-    {id: 3, datetime: new Date(), entryName: 'Pix recebido', value: 5000, category: 'credit'},
-    {id: 4, datetime: new Date(), entryName: 'Boleto Dag', value: 450, category: 'debit'},
-  ]
+  const [entries] = useEntries();
 
   return (
     <div id="report-container">
@@ -72,7 +68,10 @@ function Report() {
             </li>
           </ul>
 
-          {entries.map(entry => <Entry data={entry} />)}
+          {  entries
+            ? entries.map(entry => <Entry data={entry} />)
+            : (<p>Carregando</p>)
+          }
 
         </section>
       </main>
