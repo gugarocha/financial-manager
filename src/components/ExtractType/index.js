@@ -1,3 +1,4 @@
+import formatValueToCurrency from '../../utils/formatValueToCurrency';
 import './styles.css';
 
 export default function ExtractType({ title, value }) {
@@ -5,7 +6,7 @@ export default function ExtractType({ title, value }) {
     <div id='extractTypeContainer'>
       <h5>{title}</h5>
       <span>
-        R$ {value.toFixed(2).replace('.', ',')}
+        {formatValueToCurrency(value)}
       </span>
     </div>
   )

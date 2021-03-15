@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 export const getEntries = async () => {
-  const querySnapshot = await db.collection('entries').get();
+  const querySnapshot = await db.collection('entries').orderBy('datetime').get();
   const entries = querySnapshot.docs.map(entry => entry.data());
   
   return entries;

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getEntries } from '../services/firestore';
 
 function useEntries() {
-  const [entries, setEntries] = useState();
+  const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

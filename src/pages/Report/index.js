@@ -16,6 +16,21 @@ function Report() {
   const [date, setDate] = useState(new Date());
   const [entries] = useEntries();
 
+  function getTotalCategory(entries, category) {
+    const total = entries.reduce((acumulator, entry) => {
+      let sum = acumulator
+      if (entry.category === category) {
+        sum += entry.value
+      }
+      return sum;
+    }, 0);
+
+    return total || 0
+  };
+
+  const totalCredit = getTotalCategory(entries, 'credit')
+  const totalDebit = getTotalCategory(entries, 'debit')
+
   return (
     <div id="report-container">
       <Header page='Relatório Mensal' />
@@ -46,11 +61,20 @@ function Report() {
         </div>
 
         <section id='extractsContainer'>
-          <ExtractType title="Total de Créditos" value={50000} />
+          <ExtractType
+            title="Total de Créditos"
+            value={totalCredit}
+          />
 
-          <ExtractType title="Total de Débitos" value={30000} />
+          <ExtractType
+            title="Total de Débitos"
+            value={totalDebit}
+          />
 
-          <ExtractType title="Saldo Mensal" value={20000} />
+          <ExtractType
+            title="Saldo Mensal"
+            value={totalCredit - totalDebit}
+          />
         </section>
 
         <section id='entriesTableContainer'>

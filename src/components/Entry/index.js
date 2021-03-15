@@ -22,7 +22,7 @@ export default function Entry({ data }) {
       }>
         <span>
           { category === 'credit'? <FiPlus size={15} /> : <FiMinus size={15} /> }
-          {formatValueToCurrency(value, category)}
+          {formatValueToCurrency(value)}
         </span>
       </li>
     </ul>
