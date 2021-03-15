@@ -69,7 +69,7 @@ function Report() {
           </ul>
 
           {  entries
-            ? entries.map(entry => <Entry data={entry} />)
+            ? entries.map(entry => <Entry data={entry} key={entry.id} />)
             : (<p>Carregando</p>)
           }
 

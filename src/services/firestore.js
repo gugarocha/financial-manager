@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
+import { getUUID } from './uuid';
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -16,4 +18,17 @@ export const getEntries = async () => {
   const entries = querySnapshot.docs.map(entry => entry.data());
   
   return entries;
+};
+
+export const addEntry = async (entry) => {
+  const data = await db.collection('entries')
+    .add({
+      id: getUUID(),
+      datetime: entry.datetime,
+      entryName: entry.entryName,
+      category: entry.category,
+      value: entry.value
+    });
+  
+  console.log(data)
 };

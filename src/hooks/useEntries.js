@@ -12,7 +12,7 @@ function useEntries() {
     }
 
     fetchData();
-  }, [entries])
+  }, [])
 
   return [entries];
 };

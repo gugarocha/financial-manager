@@ -3,11 +3,11 @@ import formatValueToCurrency from '../../utils/formatValueToCurrency';
 import './styles.css';
 
 export default function Entry({ data }) {
-  const { id, datetime, entryName, value, category } = data;
+  const { datetime, entryName, value, category } = data;
   const date = new Date(datetime.seconds * 1000).toLocaleDateString('pt-br');
 
   return (
-    <ul id='entryContainer' key={id}>
+    <ul id='entryContainer'>
       <li className='entryDate'>
         <span>{date}</span>
       </li>

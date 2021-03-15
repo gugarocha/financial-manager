@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 
+import { addEntry } from '../../services/firestore'; 
+
 import Header from '../../components/Header';
 import currencyMask from '../../utils/currencyMask';
 
@@ -14,14 +16,23 @@ function NewEntry() {
   const [category, setCategory] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const value = Number(inputValue.replace(/(,|\.)/g, '')) / 100
+  async function handleSubmit() {
+    const value = Number(inputValue.replace(/(,|\.)/g, '')) / 100;
 
-    console.log(name, date, category, value);
+    try{
+      await addEntry({
+        datetime: date,
+        entryName: name,
+        category,
+        value
+      });
 
-    alert('Lançamento registrado com sucesso');
-  }
+      alert('Lançamento registrado com sucesso');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao salvar lançamento');
+    };
+  };
 
   return (
     <div id='new-entry-container'>
