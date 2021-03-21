@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import Calendar from 'react-calendar';
 
-import { addEntry } from '../../services/firestore'; 
+import { addEntry } from '../../services/firestore';
 
 import Header from '../../components/Header';
 import currencyMask from '../../utils/currencyMask';
@@ -16,10 +17,13 @@ function NewEntry() {
   const [category, setCategory] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  async function handleSubmit() {
+  const history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
     const value = Number(inputValue.replace(/(,|\.)/g, '')) / 100;
 
-    try{
+    try {
       await addEntry({
         datetime: date,
         entryName: name,
@@ -28,6 +32,7 @@ function NewEntry() {
       });
 
       alert('Lançamento registrado com sucesso');
+      history.go(0);
     } catch (error) {
       console.error(error);
       alert('Erro ao salvar lançamento');

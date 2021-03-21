@@ -28,8 +28,9 @@ function Report() {
     return total || 0
   };
 
-  const totalCredit = getTotalCategory(entries, 'credit')
-  const totalDebit = getTotalCategory(entries, 'debit')
+  const totalCredit = getTotalCategory(entries, 'credit');
+  const totalDebit = getTotalCategory(entries, 'debit');
+  const totalBalance = totalCredit - totalDebit;
 
   return (
     <div id="report-container">
@@ -73,7 +74,7 @@ function Report() {
 
           <ExtractType
             title="Saldo Mensal"
-            value={totalCredit - totalDebit}
+            value={totalBalance}
           />
         </section>
 
