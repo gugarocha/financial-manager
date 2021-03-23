@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
@@ -13,10 +14,26 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export const getEntries = async () => {
-  const querySnapshot = await db.collection('entries').orderBy('datetime').get();
-  const entries = querySnapshot.docs.map(entry => entry.data());
+export const getEntries = async (initialDate) => {
+  const selectedMonth = dayjs(initialDate).get('month');
+  const selectedYear = dayjs(initialDate).get('year');
+  const finalDate = dayjs()
+    .date(dayjs(selectedMonth).daysInMonth())
+    .month(selectedMonth)
+    .year(selectedYear)
+    .hour(23)
+    .minute(59)
+    .second(59)
+    .toDate();
   
+  const querySnapshot = await db
+    .collection('entries')
+    .orderBy('datetime')
+    .startAt(initialDate)
+    .endAt(finalDate)
+    .get();
+  const entries = querySnapshot.docs.map(entry => entry.data());
+
   return entries;
 };
 

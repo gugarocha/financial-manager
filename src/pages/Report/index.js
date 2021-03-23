@@ -1,4 +1,5 @@
 import { useState } from "react";
+import dayjs from "dayjs";
 import Calendar from "react-calendar";
 
 import useEntries from "../../hooks/useEntries";
@@ -13,8 +14,8 @@ import formatToMonthName from '../../utils/formatToMonthName';
 
 function Report() {
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [entries] = useEntries();
+  const [date, setDate] = useState(dayjs().date(1).hour(0).minute(0).second(0).toDate());
+  const [entries] = useEntries(date);
 
   function getTotalCategory(entries, category) {
     const total = entries.reduce((acumulator, entry) => {
@@ -57,8 +58,6 @@ function Report() {
               }}
             />
           </div>
-
-          <button className='searchButton'>Buscar</button>
         </div>
 
         <section id='extractsContainer'>
@@ -93,8 +92,10 @@ function Report() {
             </li>
           </ul>
 
-          {  entries
-            ? entries.map(entry => <Entry data={entry} key={entry.id} />)
+          {entries
+            ? entries.length > 0
+              ? (entries.map(entry => <Entry data={entry} key={entry.id} />))
+              : (<p className='tableMessage'>Nenhum registro encontrado</p>)
             : (<p>Carregando</p>)
           }
 

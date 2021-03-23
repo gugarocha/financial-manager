@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 import { getEntries } from '../services/firestore';
 
-function useEntries() {
+function useEntries(date) {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getEntries();
+    const fetchData = async (date) => {
+      const data = await getEntries(date);
       setEntries(data);
     }
 
-    fetchData();
-  }, [])
+    fetchData(date);
+  }, [date])
 
   return [entries];
 };
