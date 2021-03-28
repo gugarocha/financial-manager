@@ -12,7 +12,14 @@
   font-weight: 600;
 }
 
+#extractTypeContainer .extractTypeValue {
+  display: flex;
+  justify-content: center;
+}
+
 #extractTypeContainer span {
+  display: flex;
+  align-items: center;
   color: #6a7777;
   font-size: 32px;
   font-weight: bold;

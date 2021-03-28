@@ -11,27 +11,18 @@ import Entry from '../../components/Entry';
 import 'react-calendar/dist/Calendar.css';
 import './styles.css';
 import formatToMonthName from '../../utils/formatToMonthName';
+import { getTotalCredit, getTotalDebit, getTotalBalance } from "../../utils/getExtractTotals";
 
 function Report() {
+  const initialDate = dayjs().date(1).hour(0).minute(0).second(0).millisecond(0).toDate();
+
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [date, setDate] = useState(dayjs().date(1).hour(0).minute(0).second(0).toDate());
+  const [date, setDate] = useState(initialDate);
   const [entries] = useEntries(date);
 
-  function getTotalCategory(entries, category) {
-    const total = entries.reduce((acumulator, entry) => {
-      let sum = acumulator
-      if (entry.category === category) {
-        sum += entry.value
-      }
-      return sum;
-    }, 0);
-
-    return total || 0
-  };
-
-  const totalCredit = getTotalCategory(entries, 'credit');
-  const totalDebit = getTotalCategory(entries, 'debit');
-  const totalBalance = totalCredit - totalDebit;
+  const totalCredit = getTotalCredit(entries);
+  const totalDebit = getTotalDebit(entries);
+  const totalBalance = getTotalBalance(entries);
 
   return (
     <div id="report-container">
