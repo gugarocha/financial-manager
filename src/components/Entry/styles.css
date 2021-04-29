@@ -1,29 +1,40 @@
 #entryContainer {
   display: flex;
-  margin: 0;
-  padding: 10px;
   border-bottom: 1px solid #bdc3c7;
   font-size: 26px;
   font-weight: 600;
 }
 
-#entryContainer .entryDate {
+#entryContainer .entryListContainer {
+  display: flex;
+  flex: 1;
+  margin: 0;
+  padding: 10px;
+}
+
+#entryContainer .entryListContainer .entryDate {
   width: 15%;
 }
 
-#entryContainer .entryName {
+#entryContainer .entryListContainer .entryName {
   width: 65%;
 }
 
 
-#entryContainer .debitCategory {
+#entryContainer .entryListContainer .debitCategory {
   display: flex;
   align-items: center;
   color: #e74c3c;
 }
 
-#entryContainer .creditCategory {
+#entryContainer .entryListContainer .creditCategory {
   display: flex;
   align-items: center;
   color: #27ae60;
+}
+
+#entryContainer .deleteButton {
+  width: 24px;
+  padding: 10px 0;
+  cursor: pointer;
 }

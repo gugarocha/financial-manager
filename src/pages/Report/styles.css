@@ -58,7 +58,7 @@
 #entriesTableContainer .entriesTableHeader {
   display: flex;
   margin: 0;
-  padding: 10px;
+  padding: 10px 34px 10px 10px;
   border-bottom: 1px solid #7f8c8d;
 }
 

@@ -12,7 +12,7 @@ function useEntries(date) {
     }
 
     fetchData(date);
-  }, [date])
+  }, [date, entries]);
 
   return [entries];
 };
