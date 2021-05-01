@@ -1,6 +1,8 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import Calendar from "react-calendar";
+import ClipLoader from 'react-spinners/ClipLoader';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 import useEntries from "../../hooks/useEntries";
 
@@ -18,7 +20,7 @@ function Report() {
 
   const [calendarOpened, setCalendarOpened] = useState(false);
   const [date, setDate] = useState(initialDate);
-  const [entries] = useEntries(date);
+  const [entries, loading] = useEntries(date);
 
   const totalCredit = getTotalCredit(entries);
   const totalDebit = getTotalDebit(entries);
@@ -55,16 +57,19 @@ function Report() {
           <ExtractType
             title="Total de Créditos"
             value={totalCredit}
+            loading={loading}
           />
 
           <ExtractType
             title="Total de Débitos"
             value={totalDebit}
+            loading={loading}
           />
 
           <ExtractType
             title="Saldo Mensal"
             value={totalBalance}
+            loading={loading}
           />
         </section>
 
@@ -83,11 +88,15 @@ function Report() {
             </li>
           </ul>
 
-          {entries
-            ? entries.length > 0
+          {loading
+            ? (
+              <div className="loaderContainer">
+                <PulseLoader size={15} />
+              </div>
+            )
+            : entries.length > 0
               ? (entries.map(entry => <Entry data={entry} key={entry.id} />))
               : (<p className='tableMessage'>Nenhum registro encontrado</p>)
-            : (<p>Carregando</p>)
           }
 
         </section>
