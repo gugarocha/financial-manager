@@ -64,7 +64,7 @@ export const addEntry = async (entry) => {
       });
   };
 
-  const entryId = getUUID();
+  const entryId = entry.id ? entry.id : getUUID();
   await db.collection(collectionName).doc(entryId)
     .set({
       id: entryId,

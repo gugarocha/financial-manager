@@ -3,6 +3,7 @@
   border-bottom: 1px solid #bdc3c7;
   font-size: 26px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 #entryContainer .entryListContainer {

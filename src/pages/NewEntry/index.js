@@ -10,12 +10,22 @@ import currencyMask from '../../utils/currencyMask';
 import 'react-calendar/dist/Calendar.css';
 import './styles.css';
 
-function NewEntry() {
+function NewEntry({ location }) {
+  const entry = location.state ?
+    location.state :
+    {
+      id: null,
+      datetime: new Date(),
+      category: '',
+      entryName: '',
+      value: ''
+    };
+
   const [calendarOpened, setCalendarOpened] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const [date, setDate] = useState(entry.datetime);
+  const [name, setName] = useState(entry.entryName);
+  const [category, setCategory] = useState(entry.category);
+  const [inputValue, setInputValue] = useState(entry.value);
 
   const history = useHistory();
 
@@ -25,6 +35,7 @@ function NewEntry() {
 
     try {
       await addEntry({
+        id: entry.id,
         datetime: date,
         entryName: name,
         category,
@@ -32,7 +43,7 @@ function NewEntry() {
       });
 
       alert('Lançamento registrado com sucesso');
-      history.go(0);
+      entry.id ? history.goBack() : history.go(0);
     } catch (error) {
       console.error(error);
       alert('Erro ao salvar lançamento');
