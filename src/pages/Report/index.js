@@ -1,7 +1,6 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import Calendar from "react-calendar";
-import ClipLoader from 'react-spinners/ClipLoader';
 import PulseLoader from 'react-spinners/PulseLoader';
 
 import useEntries from "../../hooks/useEntries";

@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import './styles.css';
 
 function Header({ page }) {
+  const history = useHistory();
+
   return (
     <header id={'header-container'}>
-      <Link to="/">
+      <div onClick={() => history.goBack()}>
         <FiArrowLeft className={'icon'} size={30} />
-      </Link>
+      </div>
       <h3>{page}</h3>
     </header>
   );
