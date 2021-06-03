@@ -11,7 +11,6 @@ export default function Entry({ data }) {
   const [deleteButtonColor, setDeleteButtonColor] = useState('#6a7777')
   
   const { id, datetime, entryName, value, category } = data;
-  const date = new Date(datetime.seconds * 1000);
   
   const history = useHistory();
 
@@ -27,7 +26,7 @@ export default function Entry({ data }) {
           pathname: '/NewEntry',
           state: {
             id,
-            datetime: date,
+            datetime,
             entryName,
             category,
             value: String(value * 100)
@@ -35,7 +34,7 @@ export default function Entry({ data }) {
         })}
       >
         <li className='entryDate'>
-          <span>{date.toLocaleDateString('pt-br')}</span>
+          <span>{datetime.toLocaleDateString('pt-br')}</span>
         </li>
 
         <li className='entryName'>
@@ -57,7 +56,7 @@ export default function Entry({ data }) {
         className='deleteButton'
         onClick={() => 
           window.confirm(`Tem certeza que deseja excluir o seguinte lançamento?
-            Data: ${date.toLocaleDateString('pt-br')}
+            Data: ${datetime.toLocaleDateString('pt-br')}
             Nome: ${entryName}
             Valor: ${formatValueToCurrency(value)}
           `)

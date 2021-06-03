@@ -23,7 +23,11 @@ export const getEntries = async (selectedDate) => {
     .orderBy('datetime')
     .get();
 
-  const entries = querySnapshot.docs.map(entry => entry.data());
+  const data = querySnapshot.docs.map(item => item.data());
+
+  const entries = data.map(entry => {
+    return {...entry, datetime: new Date(entry.datetime.seconds * 1000)}
+  });
 
   return entries;
 };

@@ -1,6 +1,6 @@
 export function getTotalCredit(entries) {
   const totalCredit = entries.reduce((acumulator, entry) => {
-    if (entry.category === 'credit') {
+    if (entry.category === 'credit' && entry.datetime < new Date()) {
       return acumulator + entry.value;
     };
     return acumulator;
@@ -11,7 +11,7 @@ export function getTotalCredit(entries) {
 
 export function getTotalDebit(entries) {
   const totalDebit = entries.reduce((acumulator, entry) => {
-    if (entry.category === 'debit') {
+    if (entry.category === 'debit' && entry.datetime < new Date()) {
       return acumulator + entry.value;
     };
     return acumulator;
@@ -22,10 +22,14 @@ export function getTotalDebit(entries) {
 
 export function getTotalBalance(entries) {
   const totalBalance = entries.reduce((acumulator, entry) => {
-    if (entry.category === 'credit') {
-      return acumulator + entry.value;
+    if (entry.datetime < new Date()) {
+      if (entry.category === 'credit') {
+        return acumulator + entry.value;
+      };
+      return acumulator - entry.value
     };
-    return acumulator - entry.value
+    
+    return acumulator;
   }, 0);
 
   return totalBalance || 0;
