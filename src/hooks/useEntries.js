@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { getEntries } from '../services/firestore';
 
@@ -6,15 +6,13 @@ function useEntries(date) {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async (date) => {
-      const data = await getEntries(date);
-      setEntries(data);
-      setLoading(false)
-    }
+  const fetchData = useCallback(async () => {
+    const data = await getEntries(date);
+    setEntries(data);
+    setLoading(false);
+  }, [date]);
 
-    fetchData(date);
-  }, [date, entries]);
+  useEffect(fetchData, [fetchData]);
 
   return [entries, loading];
 };
