@@ -26,13 +26,16 @@ function NewEntry({ location }) {
   const [name, setName] = useState(entry.entryName);
   const [category, setCategory] = useState(entry.category);
   const [inputValue, setInputValue] = useState(entry.value);
+  const [submitting, setSubmitting] = useState(false);
 
   const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const value = Number(inputValue.replace(/(,|\.)/g, '')) / 100;
 
+    setSubmitting(true);
+    
+    const value = Number(inputValue.replace(/(,|\.)/g, '')) / 100;
     try {
       await addEntry({
         id: entry.id,
@@ -42,12 +45,13 @@ function NewEntry({ location }) {
         value
       });
 
-      alert('Lançamento registrado com sucesso');
       entry.id ? history.goBack() : history.go(0);
     } catch (error) {
       console.error(error);
       alert('Erro ao salvar lançamento');
     };
+
+    setSubmitting(false);
   };
 
   return (
@@ -116,8 +120,12 @@ function NewEntry({ location }) {
           </div>
 
           <button
-            className='confirmButton'
+            className={`
+              confirmButton
+              ${ submitting && 'submittingButton' }
+            `}
             type='submit'
+            disabled={submitting}
           >
             Confirmar
           </button>

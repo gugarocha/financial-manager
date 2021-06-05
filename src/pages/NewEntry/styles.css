@@ -59,3 +59,8 @@
 #new-entry-container .confirmButton:hover {
   background-color: #1998d3;
 }
+
+#new-entry-container .submittingButton {
+  opacity: 0.6;
+  cursor: not-allowed;
+} 
