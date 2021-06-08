@@ -9,10 +9,22 @@ import './styles.css';
 export default function Entry({ data }) {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [deleteButtonColor, setDeleteButtonColor] = useState('#6a7777')
-  
+
   const { id, datetime, entryName, value, category } = data;
-  
+
   const history = useHistory();
+
+  async function confirmDelete() {
+    const confirm = window.confirm(
+      `Tem certeza que deseja excluir o seguinte lançamento?
+            Data: ${datetime.toLocaleDateString('pt-br')}
+            Nome: ${entryName}
+            Valor: ${formatValueToCurrency(value)}
+    `);
+
+    confirm && await deleteEntry(data);
+    history.go(0);
+  };
 
   return (
     <div
@@ -54,14 +66,7 @@ export default function Entry({ data }) {
 
       <div
         className='deleteButton'
-        onClick={() => 
-          window.confirm(`Tem certeza que deseja excluir o seguinte lançamento?
-            Data: ${datetime.toLocaleDateString('pt-br')}
-            Nome: ${entryName}
-            Valor: ${formatValueToCurrency(value)}
-          `)
-          && deleteEntry(data)
-        }
+        onClick={confirmDelete}
         onMouseEnter={() => setDeleteButtonColor('#e74c3c')}
         onMouseLeave={() => setDeleteButtonColor('#6a7777')}
       >
