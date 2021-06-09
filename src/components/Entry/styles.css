@@ -19,6 +19,7 @@
 
 #entryContainer .entryListContainer .entryName {
   width: 65%;
+  text-transform: capitalize;
 }
 
 

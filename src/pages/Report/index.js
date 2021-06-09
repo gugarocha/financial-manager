@@ -7,7 +7,7 @@ import useEntries from "../../hooks/useEntries";
 
 import Header from "../../components/Header";
 import ExtractType from '../../components/ExtractType';
-import Entry from '../../components/Entry';
+import EntriesTable from "../../components/EntriesTable";
 
 import 'react-calendar/dist/Calendar.css';
 import './styles.css';
@@ -19,7 +19,7 @@ function Report() {
 
   const [calendarOpened, setCalendarOpened] = useState(false);
   const [date, setDate] = useState(initialDate);
-  const [entries, loading] = useEntries(date);
+  const [entries, futureEntries, loading] = useEntries(date);
 
   const totalCredit = getTotalCredit(entries);
   const totalDebit = getTotalDebit(entries);
@@ -93,11 +93,8 @@ function Report() {
                 <PulseLoader size={15} />
               </div>
             )
-            : entries.length > 0
-              ? (entries.map(entry => <Entry data={entry} key={entry.id} />))
-              : (<p className='tableMessage'>Nenhum registro encontrado</p>)
+            : <EntriesTable entries={entries} futureEntries={futureEntries} />
           }
-
         </section>
       </main>
     </div>

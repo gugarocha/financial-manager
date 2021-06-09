@@ -78,13 +78,6 @@
   width: 20%;
 }
 
-#entriesTableContainer .tableMessage {
-  margin-top: 20px;
-  color: #6a7777;
-  font-weight: bold;
-  text-align: center;
-}
-
 #entriesTableContainer .loaderContainer {
   display: flex;
   justify-content: center;

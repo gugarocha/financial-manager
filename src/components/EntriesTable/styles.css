@@ -1,0 +1,13 @@
+#entriesContainer .tableMessage {
+  margin-top: 20px;
+  color: #6a7777;
+  font-weight: bold;
+  text-align: center;
+}
+
+#futureEntriesContainer .futureEntriesMessage {
+  margin-top: 40px;
+  padding: 10px 34px 10px 10px;
+  border-bottom: 1px solid #7f8c8d;
+  color: #6a7777;
+}
